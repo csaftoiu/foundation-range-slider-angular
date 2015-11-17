@@ -22,7 +22,7 @@ module.exports = function (grunt) {
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
-    dist: 'dist'
+    dist: 'demosite'
   };
 
   var servePort = grunt.option('port') || 9000;
@@ -360,7 +360,7 @@ module.exports = function (grunt) {
           usemin: 'scripts/scripts.js'
         },
         cwd: '<%= yeoman.app %>',
-        src: 'views/{,*/}*.html',
+        src: 'modules/**/*.html',
         dest: '.tmp/templateCache.js'
       }
     },
@@ -436,9 +436,21 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+
+    // Documentation generation, place documentation into the demosite
+    ngdocs: {
+      options: {
+        dest: 'demosite/docs',
+        title: "Foundation Range-Slider Angular Docs"
+      },
+      api: {
+        src: ['app/modules/foundation-range-slider-angular/**/*.js']
+      }
     }
   });
 
+  grunt.loadNpmTasks('grunt-ngdocs');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -489,7 +501,8 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'newer:jshint',
-    'test',
-    'build'
+    //'test',
+    'build',
+    'ngdocs'
   ]);
 };
