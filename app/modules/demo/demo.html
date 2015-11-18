@@ -1,20 +1,31 @@
-<div class="row" style="padding-top: 20px">
+<div class="row">
   <div class="small-12 columns">
-    Foundation range slider test.
+    <h3>Basic</h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-6 columns">
+    <p class="text-center">Horizontal Slider</p>
+    <ng-include-gist id="2fef4a6d5d2a6ac78fea"></ng-include-gist>
+  </div>
+  <div class="small-6 columns">
+    <p class="text-center">Vertical Slider</p>
+    <ng-include-gist id="f4e628cda3f14c573653"></ng-include-gist>
   </div>
 </div>
 
 <div class="row">
   <div class="small-12 columns">
-    <div class="range-slider" data-slider>
-      <span class="range-slider-handle" role="slider" tabindex="0"></span>
-      <span class="range-slider-active-segment"></span>
-      <input type="hidden">
-    </div>
+    <h3>Two-Way Binding</h3>
   </div>
 </div>
 
+<div class="row">
+  <div class="small-12 columns">
+    <p>Two-way binding is provided via <code>ng-model</code>. The model value is a number. Multiple sliders and inputs
+    can share the same model value and all updates work properly.</p>
+  </div>
+</div>
 
-<script>
-  $(document).foundation();
-</script>
+<ng-include-gist id="1471c18fd10691af5449"></ng-include-gist>

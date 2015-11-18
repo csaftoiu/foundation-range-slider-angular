@@ -30,6 +30,7 @@ module.exports = function(config) {
       'bower_components/jquery-placeholder/jquery.placeholder.js',
       'bower_components/foundation/js/foundation.js',
       'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/angular-gist/angular-gist.min.js',
       // endbower
       "app/scripts/**/*.js",
       "test/mock/**/*.js",
