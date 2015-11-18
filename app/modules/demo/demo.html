@@ -1,31 +1,66 @@
 <div class="row">
   <div class="small-12 columns">
-    <h3>Basic</h3>
+    <a name="/basic"></a>
+    <h3 id="foo">Basic</h3>
   </div>
 </div>
 
 <div class="row">
   <div class="small-6 columns">
     <p class="text-center">Horizontal Slider</p>
-    <ng-include-gist id="2fef4a6d5d2a6ac78fea"></ng-include-gist>
+    <include-gist id="2fef4a6d5d2a6ac78fea"></include-gist>
   </div>
   <div class="small-6 columns">
     <p class="text-center">Vertical Slider</p>
-    <ng-include-gist id="f4e628cda3f14c573653"></ng-include-gist>
+    <include-gist id="f4e628cda3f14c573653"></include-gist>
   </div>
 </div>
 
 <div class="row">
   <div class="small-12 columns">
+    <a name="/two-way"></a>
     <h3>Two-Way Binding</h3>
+    <p>Two-way binding is provided via <code>ng-model</code>. The model value is a number. Multiple sliders and inputs
+      can share the same model value. If the model has an initial value from a controller or an
+      <code>ng-init</code>, it will be respected.
+    </p>
+  </div>
+</div>
+
+<include-gist id="1471c18fd10691af5449"></include-gist>
+
+<div class="row">
+  <div class="small-12 columns">
+    <a name="/hidden-sliders-work"></a>
+    <h3>Hidden Sliders</h3>
+    <p>Foundation's sliders <a href="http://jsfiddle.net/gRtrX/356/">do not work</a>
+      (<a href="https://github.com/zurb/foundation/issues/7011">#7011</a>) if sliders are changed
+      while they are hidden. <code>range-slider</code> works around the issue using a
+      <a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver">MutationObserver</a>.
+      Showing/hiding sliders with <code>ng-show</code>/<code>ng-hide</code> works out of the box.
+    </p>
   </div>
 </div>
 
 <div class="row">
-  <div class="small-12 columns">
-    <p>Two-way binding is provided via <code>ng-model</code>. The model value is a number. Multiple sliders and inputs
-    can share the same model value and all updates work properly.</p>
+  <div class="small-10 columns">
+    <range-slider ng-model="showHide"></range-slider>
+  </div>
+  <div class="small-2 columns">
+    <input type="number" ng-model="showHide">
+  </div>
+</div>
+<div class="row">
+  <div class="small-2 columns">
+    <button ng-click="hideSliders = !hideSliders">Toggle Sliders</button>
+  </div>
+  <div class="small-6 columns">
+    <div ng-show="!hideSliders">
+      <range-slider ng-model="showHide"></range-slider>
+    </div>
+  </div>
+  <div class="small-4 columns">
+    <range-slider ng-model="showHide" ng-hide="hideSliders"></range-slider>
   </div>
 </div>
 
-<ng-include-gist id="1471c18fd10691af5449"></ng-include-gist>

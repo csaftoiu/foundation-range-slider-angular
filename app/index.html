@@ -19,24 +19,30 @@
     <![endif]-->
 
     <!-- top bar -->
-    <nav class="top-bar" data-topbar role="navigation">
-      <ul class="title-area">
-        <li class="name">
-          <h1><a href="#">foundation-range-slider-angular</a></h1>
-        </li>
-        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-      </ul>
-      <section class="top-bar-section">
-      <!-- Left Nav Section -->
-        <ul class="left">
-          <li><a href="docs/">Documentation</a></li>
+    <div ng-class="{sticky: false}">
+      <nav class="top-bar" data-topbar role="navigation">
+        <ul class="title-area">
+          <li class="name">
+            <h1><a href="#">foundation-range-slider-angular</a></h1>
+          </li>
+          <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
         </ul>
-      </section>
-    </nav>
+        <section class="top-bar-section">
+        <!-- Left Nav Section -->
+          <ul class="left">
+            <li><a href="#/intro">Intro</a></li>
+            <li><a href="#/basic">Basic</a></li>
+            <li><a href="#/two-way">Two-way Binding</a></li>
+            <li><a href="docs/">Documentation</a></li>
+          </ul>
+        </section>
+      </nav>
+    </div>
 
     <div class="row">
       <div class="small-12 columns">
-        <h2>Description</h2>
+        <a name="/intro"></a>
+        <h2>Intro</h2>
       </div>
     </div>
 
@@ -84,7 +90,7 @@
 
     <script src="modules/demo/demo.js"></script>
     <script src="modules/demo/controller.js"></script>
-    <script src="modules/demo/ng-include-gist.js"></script>
+    <script src="modules/demo/include-gist.js"></script>
     <!-- endbuild -->
 </body>
 </html>

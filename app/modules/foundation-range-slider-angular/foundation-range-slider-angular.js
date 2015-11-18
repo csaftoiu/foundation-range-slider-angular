@@ -1,5 +1,7 @@
 'use strict';
 
+var j = 0;
+
 /**
  * @ngdoc overview
  * @name foundation-range-slider-angular
@@ -26,29 +28,36 @@ angular.module('foundation-range-slider-angular', [
       restrict: 'E',
       require: '?ngModel',
       templateUrl: 'modules/foundation-range-slider-angular/range-slider.html',
-      scope: {},
+      // scope: {},
       compile: function(cElement, cAttributes, transclude) {
+        var thisJ = j++;
         return {
           pre: function(scope, element, attrs, ngModelCrl) {
             scope.vertical = 'vertical' in attrs;
           },
           post: function (scope, element, attrs, ngModelCtrl) {
-            // as soon as done with the digest, enable the sliders
+            // as soon as done with the digest, but before rendering, enable the sliders, and *then* enable
+            // ngModelCtrl bindings
             $timeout(function () {
               $(document).foundation();
+              initializeModelCtrl();
             });
 
-            if (ngModelCtrl) {
+            var initializeModelCtrl = function () {
+              if (!ngModelCtrl) {
+                return;
+              }
+
               ngModelCtrl.$formatters.push(function (modelValue) {
-                if (modelValue === undefined) {
-                  return undefined;
-                }
-                if (modelValue === null) {
-                  return null;
+                //console.log(thisJ, "format model --> view", modelValue);
+                if (modelValue === undefined || modelValue === null) {
+                  return modelValue;
                 }
                 return ''+modelValue;
               });
+
               ngModelCtrl.$parsers.push(function (viewValue) {
+                //console.log(thisJ, "parse view --> model", viewValue);
                 if (viewValue === null) {
                   return null;
                 }
@@ -58,22 +67,9 @@ angular.module('foundation-range-slider-angular', [
               // the element with the data-slider on it is the first child, i.e. the first div
               var sliderElement = angular.element(element.children()[0]);
 
-              // on change, set new view value
-              // work around https://github.com/zurb/foundation/issues/6606 by not setting view value if
-              // nothing changed. fixes bug if have multiple sliders on the same model value
-              var lastKnownValue = sliderElement.attr('data-slider');
-              sliderElement.on('change.fndtn.slider', function (event) {
-                var newValue = sliderElement.attr('data-slider');
-                if (newValue === lastKnownValue) {
-                  return;
-                }
-
-                lastKnownValue = newValue;
-                ngModelCtrl.$setViewValue(newValue);
-              });
-
               // update slider when view value changes
               ngModelCtrl.$render = function () {
+                //console.log(thisJ, "render", ngModelCtrl.$viewValue);
                 if (ngModelCtrl.$viewValue === undefined || ngModelCtrl.$viewValue === null) {
                   // leave it where it was. happens if e.g. an <input type="number"> is empty
                   return;
@@ -82,10 +78,28 @@ angular.module('foundation-range-slider-angular', [
                 sliderElement.foundation('slider', 'set_value', ngModelCtrl.$viewValue);
               };
 
+              // trigger first render from iniital model value
+              ngModelCtrl.$render();
+
+              // on change, set new view value
+              // work around https://github.com/zurb/foundation/issues/6606 by not setting view value if
+              // nothing changed. fixes bug if have multiple sliders on the same model value
+              var lastKnownValue = null;
+              sliderElement.on('change.fndtn.slider', function (event) {
+                var newValue = sliderElement.attr('data-slider');
+                if (newValue === lastKnownValue) {
+                  return;
+                }
+                console.log(thisJ, "changed to", newValue, "from", lastKnownValue);
+
+                lastKnownValue = newValue;
+                ngModelCtrl.$setViewValue(newValue);
+              });
+
+
               // trigger $render when slider is shown
               if (typeof MutationObserver !== "undefined") {
                 var observer = new MutationObserver(function () {
-                  console.log("mutation triggered");
                   scope.$apply(function () {
                     ngModelCtrl.$render();
                   });
@@ -93,7 +107,7 @@ angular.module('foundation-range-slider-angular', [
                 // detect adding ng-show/ng-hide to some element somewhere
                 observer.observe(document, {attributes: true, subtree: true, attributeFilter: ['class']});
               }
-            }
+            };
           }
         };
       }
