@@ -153,6 +153,7 @@ module.exports = function (grunt) {
           ]
         }]
       },
+      docs: 'demosite/docs',
       server: '.tmp'
     },
 
@@ -503,6 +504,7 @@ module.exports = function (grunt) {
     'newer:jshint',
     //'test',
     'build',
+    'clean:docs',
     'ngdocs'
   ]);
 };
