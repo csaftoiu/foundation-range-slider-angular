@@ -1,0 +1,50 @@
+<script>
+  function scrollToAnchor(name) {
+    // change location
+    window.location = '#' + name;
+
+    // scroll to element anyway
+    var element = $("a[name='" + name + "']")[0];
+    if (!element) {
+      console.error("No such anchor with name", name);
+      return;
+    }
+    element.scrollIntoView();
+
+    // scroll back to leave room for sticky nav
+    var stickyNavHeight = $("nav.top-bar").height();
+    console.log(stickyNavHeight);
+    window.scrollTo(window.scrollX, window.scrollY - stickyNavHeight);
+  }
+
+  function scrollToTop() {
+    window.location = '#';
+    window.scrollTo(window.scrollX, 0);
+  }
+</script>
+
+<!-- top bar -->
+<div class="sticky">
+  <nav class="top-bar" data-topbar role="navigation">
+    <ul class="title-area">
+      <li class="name">
+        <h1><a onclick="scrollToTop()">foundation-range-slider-angular</a></h1>
+      </li>
+      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+    <section class="top-bar-section">
+    <!-- Left Nav Section -->
+      <ul class="left">
+        <li><a onclick="scrollToAnchor('/intro')">Intro</a></li>
+        <li><a onclick="scrollToAnchor('/basic')">Basic</a></li>
+        <li><a onclick="scrollToAnchor('/two-way')">Two-way Binding</a></li>
+        <li><a onclick="scrollToAnchor('/hidden')">Hidden Sliders</a></li>
+      </ul>
+      <ul class="right">
+        <li><a href="docs/">Documentation</a></li>
+      </ul>
+    </section>
+
+  </nav>
+</div>
+
