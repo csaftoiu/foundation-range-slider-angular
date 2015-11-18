@@ -1,3 +1,5 @@
+<div ng-controller="DemoCtrl">
+
 <div class="row">
   <div class="small-12 columns">
     <a name="/basic"></a>
@@ -31,7 +33,7 @@
 
 <div class="row">
   <div class="small-12 columns">
-    <a name="/hidden-sliders-work"></a>
+    <a name="/hidden"></a>
     <h3>Hidden Sliders</h3>
     <p>Foundation's sliders <a href="http://jsfiddle.net/gRtrX/356/">do not work</a>
       (<a href="https://github.com/zurb/foundation/issues/7011">#7011</a>) if sliders are changed
@@ -42,25 +44,5 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="small-10 columns">
-    <range-slider ng-model="showHide"></range-slider>
-  </div>
-  <div class="small-2 columns">
-    <input type="number" ng-model="showHide">
-  </div>
-</div>
-<div class="row">
-  <div class="small-2 columns">
-    <button ng-click="hideSliders = !hideSliders">Toggle Sliders</button>
-  </div>
-  <div class="small-6 columns">
-    <div ng-show="!hideSliders">
-      <range-slider ng-model="showHide"></range-slider>
-    </div>
-  </div>
-  <div class="small-4 columns">
-    <range-slider ng-model="showHide" ng-hide="hideSliders"></range-slider>
-  </div>
-</div>
+<include-gist id="a2555d04907ce4b1825b"></include-gist>
 

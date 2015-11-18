@@ -1,35 +1,31 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name foundation-range-slider-angular.demo.controller:DemoCtrl
- * @description
- * # DemoCtrl
- * Controller of the slider demo.
- */
-angular.module('foundation-range-slider-angular.demo')
-  .controller('DemoCtrl', function ($scope, $timeout) {
-    /*$scope.showHide = 10;
-    //$scope.showHideOpposite = 100 - $scope.showHide;
+var module = angular.module('foundation-range-slider-angular.demo')
 
-    $timeout(function () {
-      $scope.showHide = 90;
+  /**
+   * @ngdoc function
+   * @name foundation-range-slider-angular.demo.controller:DemoCtrl
+   * @description
+   * # DemoCtrl
+   * Controller of the slider demo.
+   */
 
-    }, 1000);
-*/
-    /*$scope.$watch('showHide', function () {
-      console.log($scope.showHide);
-      //$scope.showHideOpposite = 100 - $scope.showHide;
-    });*/
-    /*
-    $scope.$watch('showHideOpposite', function () {
-      $scope.showHide = 100 - $scope.showHideOpposite;
-    });*/
+  .controller('DemoCtrl', function () {})
 
-/*
-    $scope.somethingSpecial = 555;
-    $scope.$watch('somethingSpecial', function (val) {
-      console.log("something special is now", val);
-    })*/
+  .controller('ShowHideCtrl', function ($scope) {
+    $scope.showHide = 15;
+    $scope.$watch('showHide', function (val) {
+      if (val === undefined || val === null) {
+        return;
+      }
+      $scope.showHideOpposite = 100 - val;
+    });
+    $scope.$watch('showHideOpposite', function (val) {
+      if (val === undefined || val === null) {
+        return;
+      }
+      $scope.showHide = 100 - val;
+    });
   })
+
 ;

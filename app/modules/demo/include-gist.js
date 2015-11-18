@@ -18,10 +18,7 @@ angular.module('foundation-range-slider-angular.demo')
     return {
       restrict: 'A',
       link: function (scope, element, attrs) {
-        console.log("static include yes so good", scope)
         var templatePath = scope.$eval(attrs.staticInclude);
-        console.log(attrs.staticInclude);
-        console.log(templatePath);
         $http.get(templatePath, { cache: $templateCache }).success(function (response) {
           var contents = element.html(response).contents();
           $compile(contents)(scope);
@@ -77,10 +74,6 @@ angular.module('foundation-range-slider-angular.demo')
             } else {
               throw "Unknown scope type: " + scopeType;
             }
-            console.log(scope);
-            console.log(scope.data);
-            console.log(contentScope);
-            console.log(contentScope.data);
             $compile(contents)(contentScope);
           }
         };

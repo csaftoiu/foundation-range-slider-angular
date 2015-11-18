@@ -90,7 +90,7 @@ angular.module('foundation-range-slider-angular', [
                 if (newValue === lastKnownValue) {
                   return;
                 }
-                console.log(thisJ, "changed to", newValue, "from", lastKnownValue);
+                //console.log(thisJ, "changed to", newValue, "from", lastKnownValue);
 
                 lastKnownValue = newValue;
                 ngModelCtrl.$setViewValue(newValue);
