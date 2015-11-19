@@ -19,7 +19,7 @@ NG_DOCS={
       "type": "directive",
       "moduleName": "foundation-range-slider-angular",
       "shortDescription": "Creates a Foundation range slider.",
-      "keywords": "angular api assignable created creates data-bind decimal demo directive evaluated evaluating expression foundation foundation-range-slider-angular github html http io max maximum min minimum ngmodel number points precision range slider step zurb"
+      "keywords": "angular api assignable created creates data-bind decimal demo directive evaluated evaluating expression foundation foundation-range-slider-angular github horizontal html http io max maximum min minimum ngmodel number points precision range slider step vertical zurb"
     }
   ],
   "apis": {

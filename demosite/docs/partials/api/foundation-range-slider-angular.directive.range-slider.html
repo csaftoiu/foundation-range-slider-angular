@@ -8,13 +8,15 @@
 </div></div>
 <h2 id="usage">Usage</h2>
 <div class="usage">as element:<pre class="prettyprint linenums">&lt;range-slider
-       ng-model="{string}"
+       [ng-model="{string}"]
+       [vertical="{boolean}"]
        [min="{number}"]
        [max="{number}"]
        [max="{number}"]
        [max="{number}"]&gt;
 &lt;/range-slider&gt;</pre>
-<h4 id="usage_parameters">Parameters</h4><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>ngModel</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="foundation-range-slider-angular-directive-page foundation-range-slider-angular-directive-range-slider-page"><p>Assignable angular expression to data-bind to.</p>
+<h4 id="usage_parameters">Parameters</h4><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>ngModel <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="foundation-range-slider-angular-directive-page foundation-range-slider-angular-directive-range-slider-page"><p>Assignable angular expression to data-bind to.</p>
+</div></td></tr><tr><td>vertical <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-boolean">boolean</a></td><td><div class="foundation-range-slider-angular-directive-page foundation-range-slider-angular-directive-range-slider-page"><p>If present, creates a vertical slider instead of a horizontal one.</p>
 </div></td></tr><tr><td>min <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-number">number</a></td><td><div class="foundation-range-slider-angular-directive-page foundation-range-slider-angular-directive-range-slider-page"><p>Angular expression evaluating to the minimum slider value. Only evaluated once, when the
 slider is created.</p>
 <p><i>(default: 0)</i></p>
