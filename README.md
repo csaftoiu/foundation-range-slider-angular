@@ -37,7 +37,7 @@ can do for you.
 * `git checkout master`
 * Edit `bower.json`, bump `"version"` number.
 * `grunt`
-* `git commit -am "New version"
+* `git add --all .; git commit -m "New version"`
 * `git tag vVERSION` with the new version number, e.g. `git tag v0.0.1`
 * `git push --tags`
 
