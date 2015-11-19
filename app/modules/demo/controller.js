@@ -2,16 +2,6 @@
 
 var module = angular.module('foundation-range-slider-angular.demo')
 
-  /**
-   * @ngdoc function
-   * @name foundation-range-slider-angular.demo.controller:DemoCtrl
-   * @description
-   * # DemoCtrl
-   * Controller of the slider demo.
-   */
-
-  .controller('DemoCtrl', function () {})
-
   .controller('ShowHideCtrl', function ($scope) {
     $scope.showHide = 15;
     $scope.$watch('showHide', function (val) {
@@ -27,5 +17,9 @@ var module = angular.module('foundation-range-slider-angular.demo')
       $scope.showHide = 100 - val;
     });
   })
+
+  .controller('MinMaxStepCtrl', function ($scope) {
+
+  });
 
 ;

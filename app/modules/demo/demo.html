@@ -1,4 +1,10 @@
-<div ng-controller="DemoCtrl">
+<div class="row">
+  <div class="small-12 columns">
+    <hr>
+    <a name="/demo"></a>
+    <h2>Demos</h2>
+  </div>
+</div>
 
 <div class="row">
   <div class="small-12 columns">
@@ -20,6 +26,7 @@
 
 <div class="row">
   <div class="small-12 columns">
+    <hr>
     <a name="/two-way"></a>
     <h3>Two-Way Binding</h3>
     <p>Two-way binding is provided via <code>ng-model</code>. The model value is a number. Multiple sliders and inputs
@@ -33,7 +40,73 @@
 
 <div class="row">
   <div class="small-12 columns">
+    <hr>
+    <a name="/min-max-step"></a>
+    <h3>Min, Max, Step</h3>
+    <p>Min, max, and step can all be provided as angular expressions. Due to limitations in Foundation, these are only
+      applied once, when the slider is created. Precision can also be provided, which is the number of decimal
+      places to use for the values.</p>
+    <p>Model values are initialized to the middle of the range, if no initial values are provided.</p>
+  </div>
+</div>
+
+<include-gist id="91cb55792fc4ff92d3bc"></include-gist>
+
+<!--<div ng-init="min = 10; max = 200; step = 0.5; value = 66">
+  <div class="row">
+    <div class="medium-4 columns">
+      <label>Min</label>
+      <div class="row">
+        <div class="small-6 columns">
+          <range-slider min="1" max="500" ng-model="min"></range-slider>
+        </div>
+        <div class="small-6 columns">
+          <input type="number" ng-model="min">
+        </div>
+      </div>
+    </div>
+    <div class="medium-4 columns">
+      <label>Max</label>
+      <div class="row">
+        <div class="small-6 columns">
+          <range-slider min="min + 50" max="650" ng-model="max"></range-slider>
+        </div>
+        <div class="small-6 columns">
+          <input type="number" ng-model="max">
+        </div>
+      </div>
+    </div>
+    <div class="medium-4 columns">
+      <label>Step</label>
+      <div class="row">
+        <div class="small-6 columns">
+          <range-slider min="0.001" max="5" step="0.001" precision="3" ng-model="step"></range-slider>
+        </div>
+        <div class="small-6 columns">
+          <input type="number" ng-model="step">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-12 columns">
+      <label>Value</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="medium-8 small-6 columns">
+      <range-slider min="min" max="max" step="step" precision="3" ng-model="value"></range-slider>
+    </div>
+    <div class="medium-4 small-6 columns">
+      <input type="number" ng-model="value">
+    </div>
+  </div>
+</div>-->
+
+<div class="row">
+  <div class="small-12 columns">
     <a name="/hidden"></a>
+    <hr>
     <h3>Hidden Sliders</h3>
     <p>Foundation's sliders <a href="http://jsfiddle.net/gRtrX/356/">do not work</a>
       (<a href="https://github.com/zurb/foundation/issues/7011">#7011</a>) if sliders are changed
@@ -45,4 +118,3 @@
 </div>
 
 <include-gist id="a2555d04907ce4b1825b"></include-gist>
-

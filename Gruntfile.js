@@ -443,7 +443,8 @@ module.exports = function (grunt) {
     ngdocs: {
       options: {
         dest: 'demosite/docs',
-        title: "Foundation Range-Slider Angular Docs"
+        title: "Foundation Range-Slider Angular Docs",
+        startPage: '/api/foundation-range-slider-angular.directive:range-slider'
       },
       api: {
         src: ['app/modules/foundation-range-slider-angular/**/*.js']
