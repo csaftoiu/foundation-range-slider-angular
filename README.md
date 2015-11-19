@@ -39,7 +39,7 @@ can do for you.
 * `grunt`
 * `git add --all .; git commit -m "New version"`
 * `git tag vVERSION` with the new version number, e.g. `git tag v0.0.1`
-* `git push --tags`
+* `git push; git push --tags`
 
 ### Demo Site
 * `git checkout gh-pages`
