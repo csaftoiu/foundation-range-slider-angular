@@ -1,9 +1,23 @@
 {
   "name": "foundation-range-slider-angular",
-  "version": "0.0.0",
-  "main": "dist/foundation-range-slider-angular.js",
+  "version": "0.0.4",
+  "homepage": "https://github.com/csaftoiu/foundation-range-slider-angular",
+  "authors": [
+    "Claudiu Saftoiu <csaftoiu@gmail.com>"
+  ],
+  "description": "Angular directive for Foundation's Range Sliders",
+  "keywords": [
+    "foundation",
+    "range-slider",
+    "angular"
+  ],
+  "license": "WTFPL",
+  "main": ["dist/foundation-range-slider-angular.js"],
   "ignore": [
     "app",
+    "bower_components",
+    "node_modules",
+    "demosite",
     "test",
     ".bowerrc",
     ".editorconfig",

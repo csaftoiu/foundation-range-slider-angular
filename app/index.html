@@ -60,9 +60,12 @@
     <script src="bower_components/angular-gist/angular-gist.js"></script>
     <!-- endbuild -->
 
-    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <!-- NB: must be called 'scripts/module.js' and 'scripts/demo.js' for dist build to work -->
+    <!-- build:js({.tmp,app}) scripts/module.js -->
     <script src="modules/foundation-range-slider-angular/foundation-range-slider-angular.js"></script>
+    <!-- endbuild -->
 
+    <!-- build:js({.tmp,app}) scripts/demo.js -->
     <script src="modules/demo/demo.js"></script>
     <script src="modules/demo/controller.js"></script>
     <script src="modules/demo/include-gist.js"></script>
