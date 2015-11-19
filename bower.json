@@ -1,9 +1,12 @@
 {
   "name": "foundation-range-slider-angular",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "dist/foundation-range-slider-angular.js",
   "ignore": [
     "app",
+    "bower_components",
+    "node_modules",
+    "demosite",
     "test",
     ".bowerrc",
     ".editorconfig",
