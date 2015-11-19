@@ -1,7 +1,5 @@
 'use strict';
 
-// var j = 0;
-
 /**
  * @ngdoc overview
  * @name foundation-range-slider-angular
@@ -52,8 +50,6 @@ angular.module('foundation-range-slider-angular', [
       templateUrl: 'modules/foundation-range-slider-angular/range-slider.html',
       scope: { min: '=', max: '=', step: '=', precision: '=' },
       compile: function(cElement, cAttributes, transclude) {
-        // var thisJ = j++;
-
         return {
           pre: function(scope, element, attrs, ngModelCrl) {
           },
@@ -71,7 +67,6 @@ angular.module('foundation-range-slider-angular', [
               options += 'end: ' + (''+(scope.max || 100)) + '; ';
               options += 'precision: ' + (''+(scope.precision || 2)) + '; ';
               options += 'step: ' + (''+(scope.step || 1)) + '; ';
-              console.log(options);
               sliderElement.attr('data-options', options);
               $(document).foundation();
               initializeModelCtrl();
@@ -83,7 +78,6 @@ angular.module('foundation-range-slider-angular', [
               }
 
               ngModelCtrl.$formatters.push(function (modelValue) {
-                //console.log(thisJ, "format model --> view", modelValue);
                 if (modelValue === undefined || modelValue === null) {
                   return modelValue;
                 }
@@ -91,7 +85,6 @@ angular.module('foundation-range-slider-angular', [
               });
 
               ngModelCtrl.$parsers.push(function (viewValue) {
-                //console.log(thisJ, "parse view --> model", viewValue);
                 if (viewValue === null) {
                   return null;
                 }
@@ -100,7 +93,6 @@ angular.module('foundation-range-slider-angular', [
 
               // update slider when view value changes
               ngModelCtrl.$render = function () {
-                //console.log(thisJ, "render", ngModelCtrl.$viewValue, ngModelCtrl.$modelValue);
                 if (ngModelCtrl.$viewValue === undefined || ngModelCtrl.$viewValue === null) {
                   // leave it where it was. happens if e.g. an <input type="number"> is empty
                   return;
@@ -122,7 +114,6 @@ angular.module('foundation-range-slider-angular', [
               var lastKnownValue = null;
               sliderElement.on('change.fndtn.slider', function (event) {
                 var newValue = sliderElement.attr('data-slider');
-                //console.log(thisJ, "changed to", newValue, "from", lastKnownValue);
                 if (newValue === lastKnownValue) {
                   return;
                 }

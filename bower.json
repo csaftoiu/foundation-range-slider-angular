@@ -1,6 +1,6 @@
 {
   "name": "foundation-range-slider-angular",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "homepage": "https://github.com/csaftoiu/foundation-range-slider-angular",
   "authors": [
     "Claudiu Saftoiu <csaftoiu@gmail.com>"
@@ -19,17 +19,7 @@
     "node_modules",
     "demosite",
     "test",
-    ".bowerrc",
-    ".editorconfig",
-    ".gitattributes",
-    ".gitignore",
-    ".idea",
-    ".jshintrc",
-    ".sass-cache",
-    ".tmp",
-    ".travis.yml",
-    ".yo-rc.json",
-    "bower.json",
+    "**/.*",
     "Gruntfile.js",
     "package.json",
     "README.md"
