@@ -18,7 +18,7 @@ Not to worry! Foundation Range-Slider Angular is here!
 
     angular.module('app', ['foundation-range-slider-angular']);
 
-## Demo/Docs
+### Use
 
 Check out the <a href="http://csaftoiu.github.io/foundation-range-slider-angular/">demo page</a> to see everything it
 can do for you.
