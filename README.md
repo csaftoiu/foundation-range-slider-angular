@@ -27,6 +27,23 @@ can do for you.
 
 * Make your changes. Run `grunt serve` to preview as you are developing.
 * Modify the demo page to show off the new feature/bug fix, if necessary.
-* Once you are done, `grunt` to build the demo site.
+* Once you are done, `grunt` to build the demo site and dist files.
 * `http-server demosite` to test demo site as it will appear on github.io .
 * Commit changes, make pull request.
+
+## Releasing
+
+### Bower Package
+* `git checkout master`
+* Edit `bower.json`, bump `"version"` number.
+* `grunt`
+* `git commit -am "New version"
+* `git tag vVERSION` with the new version number, e.g. `git tag v0.0.1`
+* `git push --tags`
+
+### Demo Site
+* `git checkout gh-pages`
+* `git merge master`
+* `grunt`
+* `git add --all .; git commit -m "New demo site"`
+* `git push`

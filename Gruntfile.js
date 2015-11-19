@@ -332,13 +332,22 @@ module.exports = function (grunt) {
     ngtemplates: {
       demosite: {
         options: {
-          module: 'foundation-range-slider-angular',
+          module: 'foundation-range-slider-angular.demo',
           htmlmin: '<%= htmlmin.demosite.options %>',
-          usemin: 'scripts/demo.js'
+          usemin: 'scripts/demo.js' // concat into scripts/demo.js
         },
         cwd: '<%= yeoman.app %>',
-        src: 'modules/**/*.html',
-        dest: '.tmp/templateCache.js'
+        src: 'modules/demo/**/*.html',
+        dest: '.tmp/demo.templateCache.js'
+      },
+      dist: {
+        options: {
+          module: 'foundation-range-slider-angular',
+          usemin: 'scripts/module.js' // concat into scripts/module.js
+        },
+        cwd: '<%= yeoman.app %>',
+        src: 'modules/foundation-range-slider-angular/**/*.html',
+        dest: '.tmp/module.templateCache.js'
       }
     },
 
@@ -391,20 +400,21 @@ module.exports = function (grunt) {
         src: '{,*/}*.css'
       },
       dist: {
-        // copy main & minified module file
         files: [{
+          // copy concatted version (with the directive templates)
           expand: true,
-          cwd: '<%= yeoman.app %>/modules/foundation-range-slider-angular',
+          cwd: '.tmp/concat/scripts',
           dest: '<%= yeoman.dist %>',
-          src: [
-            '*.js'
-          ]
+          src: ['module.js'],
+          rename: function (dest, src) {
+            return dest + '/' + 'foundation-range-slider-angular.js';
+          }
         }, {
           // copy the minified module script from the demo site
           expand: true,
           cwd: '<%= yeoman.demosite %>/scripts/',
           dest: '<%= yeoman.dist %>',
-          src: ['module*.js'],
+          src: ['module.*.js'], // should only be one file
           rename: function (dest, src) {
             return dest + '/' + 'foundation-range-slider-angular.min.js';
           }

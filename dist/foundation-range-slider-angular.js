@@ -45,7 +45,7 @@ angular.module('foundation-range-slider-angular', [
    * @example See the {@link http://csaftoiu.github.io/foundation-range-slider-angular/ demo page}.
    *
    */
-  .directive('rangeSlider', function ($timeout, $compile) {
+  .directive('rangeSlider', ["$timeout", "$compile", function ($timeout, $compile) {
     return {
       restrict: 'E',
       require: '?ngModel',
@@ -149,6 +149,19 @@ angular.module('foundation-range-slider-angular', [
         };
       }
     };
-  })
+  }])
 
 ;
+
+angular.module('foundation-range-slider-angular').run(['$templateCache', function($templateCache) {
+  'use strict';
+
+  $templateCache.put('modules/foundation-range-slider-angular/range-slider.html',
+    "<div class=\"range-slider\" ng-class=\"{'vertical-range': vertical}\" data-slider>\n" +
+    "  <span class=\"range-slider-handle\" role=\"slider\" tabindex=\"0\"></span>\n" +
+    "  <span class=\"range-slider-active-segment\"></span>\n" +
+    "  <input type=\"hidden\">\n" +
+    "</div>\n"
+  );
+
+}]);
