@@ -18,8 +18,8 @@ NG_DOCS={
       "shortName": "range-slider",
       "type": "directive",
       "moduleName": "foundation-range-slider-angular",
-      "shortDescription": "Creates a Foundation range slider",
-      "keywords": "api creates directive foundation foundation-range-slider-angular html http range slider zurb"
+      "shortDescription": "Creates a Foundation range slider.",
+      "keywords": "angular api assignable created creates data-bind decimal demo directive evaluated evaluating expression foundation foundation-range-slider-angular github html http io max maximum min minimum ngmodel number points precision range slider step zurb"
     }
   ],
   "apis": {
@@ -27,7 +27,7 @@ NG_DOCS={
   },
   "html5Mode": false,
   "editExample": true,
-  "startPage": "/api",
+  "startPage": "/api/foundation-range-slider-angular.directive:range-slider",
   "scripts": [
     "angular.min.js"
   ]
