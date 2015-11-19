@@ -10,6 +10,8 @@ Foundation has <a href="http://foundation.zurb.com/docs/components/range_slider.
 
 Not to worry! Foundation Range-Slider Angular is here!
 
+    bower install --save foundation-range-slider-angular
+
 ## Demo/Docs
 
 Check out the <a href="http://csaftoiu.github.io/foundation-range-slider-angular/">demo page</a> to see everything it
