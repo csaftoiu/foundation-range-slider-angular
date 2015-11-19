@@ -31,11 +31,11 @@ angular.module('foundation-range-slider-angular', [
    * slider is created.
    *
    * <i>(default: 100)</i>
-   * @param {number=} max Angular expression evaluating to the slider step value. Only evaluated once, when the
+   * @param {number=} step Angular expression evaluating to the slider step value. Only evaluated once, when the
    * slider is created.
    *
    * <i>(default: 1)</i>
-   * @param {number=} max Angular expression evaluating to the precision, i.e. the number of decimal points to use.
+   * @param {number=} precision Angular expression evaluating to the precision, i.e. the number of decimal points to use.
    * Only evaluated once, when the slider is created.
    *
    * <i>(default: 2)</i>
