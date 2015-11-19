@@ -1,6 +1,6 @@
 'use strict';
 
-var j = 0;
+// var j = 0;
 
 /**
  * @ngdoc overview
@@ -23,7 +23,8 @@ angular.module('foundation-range-slider-angular', [
    *
    * @description Creates a Foundation {@link http://foundation.zurb.com/docs/components/range_slider.html range slider}.
    *
-   * @param {string} ngModel Assignable angular expression to data-bind to.
+   * @param {string=} ngModel Assignable angular expression to data-bind to.
+   * @param {boolean=} vertical If present, creates a vertical slider instead of a horizontal one.
    * @param {number=} min Angular expression evaluating to the minimum slider value. Only evaluated once, when the
    * slider is created.
    *
@@ -51,7 +52,7 @@ angular.module('foundation-range-slider-angular', [
       templateUrl: 'modules/foundation-range-slider-angular/range-slider.html',
       scope: { min: '=', max: '=', step: '=', precision: '=' },
       compile: function(cElement, cAttributes, transclude) {
-        var thisJ = j++;
+        // var thisJ = j++;
 
         return {
           pre: function(scope, element, attrs, ngModelCrl) {
@@ -69,7 +70,7 @@ angular.module('foundation-range-slider-angular', [
               options += 'start: ' + (''+(scope.min || 0)) + '; ';
               options += 'end: ' + (''+(scope.max || 100)) + '; ';
               options += 'precision: ' + (''+(scope.precision || 2)) + '; ';
-              options += 'step: ' + (''+(scope.step || 1)) + '; '
+              options += 'step: ' + (''+(scope.step || 1)) + '; ';
               console.log(options);
               sliderElement.attr('data-options', options);
               $(document).foundation();

@@ -1,6 +1,6 @@
 'use strict';
 
-var module = angular.module('foundation-range-slider-angular.demo')
+angular.module('foundation-range-slider-angular.demo')
 
   .controller('ShowHideCtrl', function ($scope) {
     $scope.showHide = 15;
@@ -17,9 +17,5 @@ var module = angular.module('foundation-range-slider-angular.demo')
       $scope.showHide = 100 - val;
     });
   })
-
-  .controller('MinMaxStepCtrl', function ($scope) {
-
-  });
 
 ;

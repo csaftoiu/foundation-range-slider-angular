@@ -1,7 +1,5 @@
 'use strict';
 
-var j = 0;
-
 angular.module('foundation-range-slider-angular.demo')
 
   /**
@@ -46,7 +44,7 @@ angular.module('foundation-range-slider-angular.demo')
       restrict: 'E',
       compile: function () {
         return {
-          pre: function (scope, element, attrs, ngModelCtrl) {
+          pre: function (scope, element, attrs) {
             var id = attrs.id;
             var file = attrs.file || 'example.html';
             var url = "https://gist.githubusercontent.com/csaftoiu/" + id + "/raw/" + file;
