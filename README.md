@@ -6,6 +6,8 @@ Foundation has <a href="http://foundation.zurb.com/docs/components/range_slider.
  to use them. <a href="https://pineconellc.github.io/angular-foundation/">Angular Foundation</a> does not support them.
  This makes you sad.
 
+## The Solution
+
 Not to worry! Foundation Range-Slider Angular is here!
 
 ## Demo/Docs
