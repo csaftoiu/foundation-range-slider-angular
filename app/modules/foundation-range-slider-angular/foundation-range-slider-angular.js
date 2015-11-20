@@ -59,19 +59,8 @@ angular.module('foundation-range-slider-angular', [
             // the element with the data-slider on it is the first child, i.e. the first div
             var sliderElement = angular.element(element.children()[0]);
 
-            // reflow enable the slider after the digest is done
-            $timeout(function () {
-              var options = '';
-              options += 'vertical: ' + (scope.vertical) + '; ';
-              options += 'start: ' + (''+(scope.min || 0)) + '; ';
-              options += 'end: ' + (''+(scope.max || 100)) + '; ';
-              options += 'precision: ' + (''+(scope.precision || 2)) + '; ';
-              options += 'step: ' + (''+(scope.step || 1)) + '; ';
-              sliderElement.attr('data-options', options);
-              $(document).foundation();
-              initializeModelCtrl();
-            });
-
+            // wait 'till digest cycle is done before flowing slider, so call the
+            // init function after
             var initializeModelCtrl = function () {
               if (!ngModelCtrl) {
                 return;
@@ -136,6 +125,18 @@ angular.module('foundation-range-slider-angular', [
                 $(document).attr('frsa-observed', '');
               }
             };
+
+            $timeout(function () {
+              var options = '';
+              options += 'vertical: ' + (scope.vertical) + '; ';
+              options += 'start: ' + (''+(scope.min || 0)) + '; ';
+              options += 'end: ' + (''+(scope.max || 100)) + '; ';
+              options += 'precision: ' + (''+(scope.precision || 2)) + '; ';
+              options += 'step: ' + (''+(scope.step || 1)) + '; ';
+              sliderElement.attr('data-options', options);
+              $(document).foundation();
+              initializeModelCtrl();
+            });
           }
         };
       }
