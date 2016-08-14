@@ -76,6 +76,20 @@ angular.module('foundation-range-slider-angular', [
             return parseFloat(viewValue);
           });
 
+          // on change, set new view value
+          // work around https://github.com/zurb/foundation/issues/6606 by not setting view value if
+          // nothing changed. fixes bug if have multiple sliders on the same model value
+          var lastKnownValue = null;
+          var sliderValueChange = function (event) {
+            var newValue = sliderElement.attr('data-slider');
+            if (newValue === lastKnownValue) {
+              return;
+            }
+
+            lastKnownValue = newValue;
+            ngModelCtrl.$setViewValue(newValue);
+          };
+
           // update slider when view value changes
           ngModelCtrl.$render = function () {
             if (ngModelCtrl.$viewValue === undefined || ngModelCtrl.$viewValue === null) {
@@ -84,21 +98,13 @@ angular.module('foundation-range-slider-angular', [
             }
 
             sliderElement.foundation('slider', 'set_value', ngModelCtrl.$viewValue);
+
+            // work around for foundation versions where this is not fixed: https://github.com/zurb/foundation-sites/pull/6210
+            sliderElement.off('change.fndtn.slider', sliderValueChange);
+            sliderElement.on('change.fndtn.slider', sliderValueChange);
           };
 
-          // on change, set new view value
-          // work around https://github.com/zurb/foundation/issues/6606 by not setting view value if
-          // nothing changed. fixes bug if have multiple sliders on the same model value
-          var lastKnownValue = null;
-          sliderElement.on('change.fndtn.slider', function (event) {
-            var newValue = sliderElement.attr('data-slider');
-            if (newValue === lastKnownValue) {
-              return;
-            }
-
-            lastKnownValue = newValue;
-            ngModelCtrl.$setViewValue(newValue);
-          });
+          sliderElement.on('change.fndtn.slider', sliderValueChange);
 
           // re-flow sliders whenever a slider may have appeared after being hidden
           // only trigger once per document, and do the entire document
