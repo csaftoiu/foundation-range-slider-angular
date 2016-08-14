@@ -43,102 +43,109 @@ angular.module('foundation-range-slider-angular', [
    * @example See the {@link http://csaftoiu.github.io/foundation-range-slider-angular/ demo page}.
    *
    */
-  .directive('rangeSlider', function ($timeout, $compile) {
+  .directive('rangeSlider', function ($timeout) {
     return {
       restrict: 'E',
       require: '?ngModel',
       templateUrl: 'modules/foundation-range-slider-angular/range-slider.html',
       scope: { min: '=', max: '=', step: '=', precision: '=' },
-      compile: function(cElement, cAttributes, transclude) {
-        return {
-          pre: function(scope, element, attrs, ngModelCrl) {
-          },
-          post: function (scope, element, attrs, ngModelCtrl) {
-            scope.vertical = 'vertical' in attrs; // for the class
+      link: function (scope, element, attrs, ngModelCtrl) {
+        scope.vertical = 'vertical' in attrs; // for the class
 
-            // the element with the data-slider on it is the first child, i.e. the first div
-            var sliderElement = angular.element(element.children()[0]);
+        // the element with the data-slider on it is the first child, i.e. the first div
+        var sliderElement = angular.element(element.children()[0]);
 
-            // wait 'till digest cycle is done before flowing slider, so call the
-            // init function after
-            var initializeModelCtrl = function () {
-              if (!ngModelCtrl) {
-                return;
-              }
-
-              ngModelCtrl.$formatters.push(function (modelValue) {
-                if (modelValue === undefined || modelValue === null) {
-                  return modelValue;
-                }
-                return ''+modelValue;
-              });
-
-              ngModelCtrl.$parsers.push(function (viewValue) {
-                if (viewValue === null) {
-                  return null;
-                }
-                return parseFloat(viewValue);
-              });
-
-              // update slider when view value changes
-              ngModelCtrl.$render = function () {
-                if (ngModelCtrl.$viewValue === undefined || ngModelCtrl.$viewValue === null) {
-                  // leave it where it was. happens if e.g. an <input type="number"> is empty
-                  return;
-                }
-
-                sliderElement.foundation('slider', 'set_value', ngModelCtrl.$viewValue);
-              };
-
-              // initialize to half-slider
-              if (ngModelCtrl.$viewValue === undefined) {
-                ngModelCtrl.$setViewValue(((scope.max - scope.min) / 2 + scope.min).toFixed(scope.precision || 2));
-              }
-              // trigger first render from initial model value
-              ngModelCtrl.$render();
-
-              // on change, set new view value
-              // work around https://github.com/zurb/foundation/issues/6606 by not setting view value if
-              // nothing changed. fixes bug if have multiple sliders on the same model value
-              var lastKnownValue = null;
-              sliderElement.on('change.fndtn.slider', function (event) {
-                var newValue = sliderElement.attr('data-slider');
-                if (newValue === lastKnownValue) {
-                  return;
-                }
-
-                lastKnownValue = newValue;
-                ngModelCtrl.$setViewValue(newValue);
-              });
-
-              // re-flow sliders whenever a slider may have appeared after being hidden
-              // only trigger once per document, and do the entire document
-              if (typeof MutationObserver !== "undefined" && $(document).attr('frsa-observed') === undefined) {
-                var observer = new MutationObserver(function () {
-                  scope.$apply(function () {
-                    $(document).foundation('slider', 'reflow');
-                  });
-                });
-
-                // detect ng-show/ng-hide changes via class attribute
-                observer.observe(document, {attributes: true, subtree: true, attributeFilter: ['class']});
-                $(document).attr('frsa-observed', '');
-              }
-            };
-
-            $timeout(function () {
-              var options = '';
-              options += 'vertical: ' + (scope.vertical) + '; ';
-              options += 'start: ' + (''+(scope.min || 0)) + '; ';
-              options += 'end: ' + (''+(scope.max || 100)) + '; ';
-              options += 'precision: ' + (''+(scope.precision || 2)) + '; ';
-              options += 'step: ' + (''+(scope.step || 1)) + '; ';
-              sliderElement.attr('data-options', options);
-              $(document).foundation();
-              initializeModelCtrl();
-            });
+        // wait 'till digest cycle is done before flowing slider, so call the
+        // init function after
+        var initializeModelCtrl = function () {
+          if (!ngModelCtrl) {
+            return;
           }
+
+          ngModelCtrl.$formatters.push(function (modelValue) {
+            if (modelValue === undefined || modelValue === null) {
+              return modelValue;
+            }
+            return ''+modelValue;
+          });
+
+          ngModelCtrl.$parsers.push(function (viewValue) {
+            if (viewValue === null) {
+              return null;
+            }
+            return parseFloat(viewValue);
+          });
+
+          // on change, set new view value
+          // work around https://github.com/zurb/foundation/issues/6606 by not setting view value if
+          // nothing changed. fixes bug if have multiple sliders on the same model value
+          var lastKnownValue = null;
+          var sliderValueChange = function (event) {
+            var newValue = sliderElement.attr('data-slider');
+            if (newValue === lastKnownValue) {
+              return;
+            }
+
+            lastKnownValue = newValue;
+            ngModelCtrl.$setViewValue(newValue);
+          };
+
+          // update slider when view value changes
+          ngModelCtrl.$render = function () {
+            if (ngModelCtrl.$viewValue === undefined || ngModelCtrl.$viewValue === null) {
+              // leave it where it was. happens if e.g. an <input type="number"> is empty
+              return;
+            }
+
+            sliderElement.foundation('slider', 'set_value', ngModelCtrl.$viewValue);
+
+            // work around for foundation versions where this is not fixed: https://github.com/zurb/foundation-sites/pull/6210
+            sliderElement.off('change.fndtn.slider', sliderValueChange);
+            sliderElement.on('change.fndtn.slider', sliderValueChange);
+          };
+
+          sliderElement.on('change.fndtn.slider', sliderValueChange);
+
+          // re-flow sliders whenever a slider may have appeared after being hidden
+          // only trigger once per document, and do the entire document
+          if (typeof MutationObserver !== "undefined" && $(document).attr('frsa-observed') === undefined) {
+            var observer = new MutationObserver(function () {
+              scope.$apply(function () {
+                $(document).foundation('slider', 'reflow');
+              });
+            });
+
+            // detect ng-show/ng-hide changes via class attribute
+            observer.observe(document, {attributes: true, subtree: true, attributeFilter: ['class']});
+            $(document).attr('frsa-observed', '');
+          }
+
+          // initialize to half-slider
+          if (ngModelCtrl.$viewValue === undefined) {
+            ngModelCtrl.$setViewValue(((scope.max - scope.min) / 2 + scope.min).toFixed(scope.precision || 2));
+          }
+
+          // trigger first render from initial model value
+          ngModelCtrl.$render();
         };
+
+        var flowIt = function () {
+          var options = '';
+          var min = scope.min === undefined ? 0 : scope.min;
+          var max = scope.max === undefined ? 100 : scope.max;
+          var precision = scope.precision === undefined ? 2 : scope.precision;
+          var step = scope.step === undefined ? 1 : scope.step;
+
+          options += 'vertical: ' + (scope.vertical) + '; ';
+          options += 'start: ' + (''+min) + '; ';
+          options += 'end: ' + (''+max) + '; ';
+          options += 'precision: ' + (''+precision) + '; ';
+          options += 'step: ' + (''+step) + '; ';
+          sliderElement.attr('data-options', options);
+          $(document).foundation();
+          initializeModelCtrl();
+        };
+        $timeout(flowIt);
       }
     };
   })
